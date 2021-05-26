@@ -1,0 +1,90 @@
+{[{ define "index/index.html" }]}
+{[{template "header" .}]}
+
+<title>文件管理器</title>
+
+<style>
+    .el-main {
+        padding-top: 0px
+    }
+
+    .el-form-item {
+        margin-bottom: 1px !important;
+    }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+    <el-form ref="form" label-width="80px">
+        <el-form-item>
+            <div style="font-size: 20px;">文件管理器登陆</div>
+            <div style="color: #888888">登录密码请修改YAML里的密码</div>
+        </el-form-item>
+        <el-form-item label="密码">
+            <el-input type="password" v-model="password" style="width: 180px"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" v-loading.fullscreen.lock="fullscreenLoading" @click="Login">登陆</el-button>
+        </el-form-item>
+    </el-form>
+
+
+</div>
+</body>
+
+
+<script>
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                xmguid: "{[{ .xmguid}]}",
+                password: "",
+                fullscreenLoading: false
+            }
+        },
+        mounted() {
+
+        },
+        methods: {
+            Login: function () {
+                this.errormsg = "";
+                var that = this;
+                if (this.password == "") {
+                    that.$message.error("请填写密码");
+                    return;
+                }
+
+                var postdata = {"password": this.password, "xmguid": this.xmguid}
+                this.fullscreenLoading = true;
+
+                request({
+                    url: 'api/login',
+                    data: postdata,
+                    method: 'post'
+                }, this.Header).then(res => {
+                    that.fullscreenLoading = false;
+                    if (res.status == 200) {
+                        that.$message.success(res.message);
+                        that.password = ""
+                        window.location.href = "app"
+                    } else {
+                        that.$message.error(res.message);
+                    }
+                }).catch(err => {
+                    that.fullscreenLoading = false;
+                })
+
+
+            },
+            onSubmit() {
+                console.log('submit!');
+            }
+        }
+    });
+</script>
+
+{[{end}]}

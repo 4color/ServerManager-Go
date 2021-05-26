@@ -1,0 +1,29 @@
+body {
+    margin: 3px;
+}
+
+body, div, td {
+    font-size: 12px !important;
+}
+
+body::-webkit-scrollbar, #output iframe::-webkit-scrollbar, .divsroll::-webkit-scrollbar {
+    width: 0.4em;
+    height: 0.2em;
+}
+
+body::-webkit-scrollbar-thumb, #output iframe::-webkit-scrollbar-thumb, .divsroll::-webkit-scrollbar-thumb {
+    background: #cccccc;
+}
+
+body::-webkit-scrollbar-thumb, #output iframe::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.32);
+}
+
+body::-webkit-scrollbar-track, #output iframe::-webkit-scrollbar-track {
+    background: none;
+}
+
+.el-form-item {
+    margin-bottom: 1px !important;
+}
+

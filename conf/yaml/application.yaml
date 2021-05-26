@@ -1,0 +1,7 @@
+application:
+  mode: debug #gin的启动模式， debug or release or test
+  server:
+    port: 8302
+    name: servermanager
+  pwd: 133
+  ver: 1.0.0
